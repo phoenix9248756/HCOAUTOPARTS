@@ -51,9 +51,9 @@
       width: 50px;
       height: 50px;
       object-fit: contain;
-      background: #fff;
-      border-radius: 12px;
-      padding: 5px;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
       transition: 0.2s;
     }
     .logo-img:hover {
@@ -123,7 +123,6 @@
       position: relative;
       width: 100%;
       background: #0b0c10;
-      cursor: pointer;
       overflow: hidden;
     }
     .home-hero-image img {
@@ -132,24 +131,7 @@
       max-height: 520px;
       object-fit: cover;
       display: block;
-      transition: opacity 0.3s;
     }
-    .hero-img-overlay {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      opacity: 0.8;
-      transition: 0.2s;
-    }
-    .home-hero-image:hover .hero-img-overlay { opacity: 1; background: #e3222b; }
     /* Products Grid */
     .section-title {
       text-align: center;
@@ -179,8 +161,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
-      cursor: pointer;
       overflow: hidden;
     }
     .product-img img {
@@ -191,22 +171,6 @@
     .product-img .placeholder-icon {
       font-size: 4rem;
       color: #e3222b;
-    }
-    .img-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      text-align: center;
-      padding: 5px;
-      font-size: 12px;
-      opacity: 0;
-      transition: 0.2s;
-    }
-    .product-img:hover .img-overlay {
-      opacity: 1;
     }
     .product-info { padding: 18px; }
     .product-info h3 { font-size: 1.3rem; font-weight: 700; }
@@ -280,31 +244,55 @@
       cursor: pointer;
     }
     .cat-btn.active, .cat-btn:hover { background: #e3222b; color: white; }
-    /* Image Upload Modal */
-    .image-upload-modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
+    /* Contact Page Specific */
+    .contact-page-hero {
+      background: linear-gradient(120deg, #111217, #1d1e2c);
+      padding: 50px 0;
+      text-align: center;
+      color: white;
+    }
+    .contact-details-large {
+      background: white;
+      border-radius: 32px;
+      padding: 48px;
+      margin: -30px auto 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .contact-info-item {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .contact-icon-circle {
+      background: #e3222b;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000;
+      color: white;
+      font-size: 1.4rem;
     }
-    .modal-card {
-      background: white;
-      padding: 30px;
-      border-radius: 32px;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
+    .map-container {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      margin: 30px 0;
+      border: 1px solid #eee;
     }
-    .modal-card input {
-      margin: 20px 0;
+    .map-container iframe {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
+      height: 350px;
+      border: none;
+      display: block;
     }
     @media (max-width: 780px) {
       .nav-links {
@@ -318,43 +306,37 @@
       .nav-links.show { display: flex; }
       .mobile-menu { display: block; }
       .home-hero-image img { max-height: 380px; }
+      .contact-details-large {
+        padding: 24px;
+        margin: -20px 12px 30px;
+      }
+      .map-container iframe {
+        height: 280px;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Image Upload Modal -->
-<div id="imageModal" class="image-upload-modal">
-  <div class="modal-card">
-    <i class="fas fa-image" style="font-size: 2.5rem; color:#e3222b;"></i>
-    <h3 id="modalTitle">Upload Image</h3>
-    <input type="file" id="modalFileInput" accept="image/png, image/jpeg, image/jpg, image/webp">
-    <button id="modalConfirmBtn" class="btn-primary" style="background:#e3222b;">Set Image</button>
-    <button id="modalCancelBtn" style="margin-top:12px; background:none; border:none; cursor:pointer;">Cancel</button>
-  </div>
-</div>
-
 <!-- HOME PAGE -->
 <div id="homePage">
   <div class="navbar">
     <div class="container nav-flex">
-      <div class="logo-area" id="logoClickArea">
-        <img id="dynamicLogo" class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
+      <div class="logo-area">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
         <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
       </div>
       <div class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
       <ul class="nav-links" id="navLinks">
         <li><a href="#" id="homeNavLink" class="active">Home</a></li>
-        <li><a href="#" id="productsNavLink">Products</a></li>
+        <li><a href="#" id="productsNavLinkHome">Products</a></li>
         <li><a href="#" id="contactNavLinkHome">Contact</a></li>
       </ul>
     </div>
   </div>
 
-  <!-- Static Hero Image Section (replaced slider) -->
-  <div class="home-hero-image" id="homeHeroImageContainer">
-    <img id="homeHeroImg" src="https://picsum.photos/id/105/1600/600" alt="Premium Motorcycle Parts">
-    <div class="hero-img-overlay"><i class="fas fa-camera"></i> Click to change image</div>
+  <div class="home-hero-image">
+    <img src="https://picsum.photos/id/105/1600/600" alt="Premium Motorcycle Parts">
   </div>
 
   <div class="features-strip">
@@ -374,16 +356,6 @@
     </div>
   </div>
 
-  <div class="container contact-about" id="homeContactSection">
-    <div class="contact-card"><h3><i class="fas fa-phone-alt"></i> CONTACT US</h3><p>Feel free to contact us for any query or bulk order.</p>
-      <div><p><i class="fas fa-phone"></i> 03026628657</p><p><i class="fas fa-envelope"></i> info@hcoautoparts.com</p><p><i class="fas fa-map-marker-alt"></i> Sunday Industrial Area, Lahore, Pakistan</p></div>
-      <a href="https://wa.me/03006628567
-        " class="btn-primary" style="background:#25D366; display:inline-block; margin-top:16px;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
-    </div>
-    <div class="about-card"><h3>ABOUT HCO AUTOPARTS</h3><p>HCO Auto Parts is a trusted name in manufacturing high quality motorcycle plastic parts. Under leadership of Shahid Imran, we are committed to providing best products. More than 10 years of experience, trusted by hundreds of customers across Pakistan.</p>
-    <button id="readMoreBtnHome" style="background:none; border:none; color:#e3222b; font-weight:600; margin-top:12px; cursor:pointer;">READ MORE →</button></div>
-  </div>
-
   <div class="container" style="text-align:center; margin: 30px auto 50px;">
     <div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;">
       <h3>READY TO PLACE YOUR ORDER?</h3>
@@ -391,22 +363,22 @@
       <a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> CONTACT ON WHATSAPP</a>
     </div>
   </div>
-  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>PRODUCTS</h4><ul><li>Side Cover</li><li>Chain Cover</li><li>Mud Guard</li><li>Headlight Visor</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>0312 6247387</li><li>info@hcoautoparts.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>PRODUCTS</h4><ul><li>Side Cover</li><li>Chain Cover</li><li>Mud Guard</li><li>Headlight Visor</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>info@hcoautoparts.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
 </div>
 
 <!-- PRODUCTS PAGE -->
 <div id="productsPage" style="display: none;">
   <div class="navbar">
     <div class="container nav-flex">
-      <div class="logo-area" id="logoClickArea2">
-        <img id="dynamicLogo2" class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
+      <div class="logo-area">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
         <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
       </div>
       <div class="mobile-menu" id="mobileMenuBtn2"><i class="fas fa-bars"></i></div>
       <ul class="nav-links" id="navLinks2">
         <li><a href="#" id="homeNavLink2">Home</a></li>
         <li><a href="#" id="productsNavLink2" class="active">Products</a></li>
-        <li><a href="#" id="contactNavLinkProducts">Contact</a></li>
+        <li><a href="#" id="contactNavLink2">Contact</a></li>
       </ul>
     </div>
   </div>
@@ -423,47 +395,102 @@
     </div>
     <div id="fullProductsGrid" class="products-grid"></div>
   </div>
-  <div class="container" style="text-align:center; margin: 30px auto;"><div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;"><h3>NEED BULK ORDER?</h3><p>Contact us for wholesale prices.</p><a href="https://wa.me/923126247387" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a></div></div>
-  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>0312 6247387</li><li>info@hcoautoparts.com</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+  <div class="container" style="text-align:center; margin: 30px auto;"><div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;"><h3>NEED BULK ORDER?</h3><p>Contact us for wholesale prices.</p><a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a></div></div>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>info@hcoautoparts.com</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
 </div>
 
-<a href="https://wa.me/923126247387" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+<!-- CONTACT PAGE -->
+<div id="contactPage" style="display: none;">
+  <div class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-area">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
+        <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
+      </div>
+      <div class="mobile-menu" id="mobileMenuBtn3"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links" id="navLinks3">
+        <li><a href="#" id="homeNavLink3">Home</a></li>
+        <li><a href="#" id="productsNavLink3">Products</a></li>
+        <li><a href="#" id="contactNavLink3" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact-page-hero">
+    <div class="container">
+      <h1 style="font-size: 2.4rem; margin-bottom: 10px;">GET IN TOUCH</h1>
+      <p style="color: #ccc;">We'd love to hear from you. Reach out for any query or bulk order.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="contact-details-large">
+      <div class="contact-info-item">
+        <div class="contact-icon-circle"><i class="fas fa-phone-alt"></i></div>
+        <div>
+          <h4 style="font-weight: 700; margin-bottom: 4px;">Phone</h4>
+          <p style="color: #555;">03026628657</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon-circle"><i class="fas fa-envelope"></i></div>
+        <div>
+          <h4 style="font-weight: 700; margin-bottom: 4px;">Email</h4>
+          <p style="color: #555;">mughal241023@gmail.com</p>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <h4 style="font-weight: 700; margin-bottom: 4px;">Address</h4>
+          <p style="color: #555;">Sunday Industrial Area, Lahore, Pakistan</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE LOCATION MAP -->
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.123456789!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39191c1e8c8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sSunday%20Industrial%20Area%2C%20Lahore%2C%20Pakistan!5e0!3m2!1sen!2s!4v1616600000000!5m2!1sen!2s" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"
+        title="HCO Auto Parts Location">
+      </iframe>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 30px; margin: 40px 0;">
+      <div style="flex: 1; background: #fbfbfd; border-radius: 28px; padding: 28px;">
+        <h3 style="margin-bottom: 16px;"><i class="fas fa-clock" style="color: #e3222b;"></i> BUSINESS HOURS</h3>
+        <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
+        <p>Sunday: Closed</p>
+      </div>
+      <div style="flex: 1; background: #fbfbfd; border-radius: 28px; padding: 28px;">
+        <h3 style="margin-bottom: 16px;"><i class="fas fa-comment-dots" style="color: #e3222b;"></i> QUICK CONNECT</h3>
+        <p style="margin-bottom: 16px;">Prefer WhatsApp? Chat with us instantly.</p>
+        <a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+      </div>
+    </div>
+  </div>
+
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>info@hcoautoparts.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+</div>
+
+<a href="https://wa.me/923001431225" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-  // PRODUCT DATA
+  // ---------- PRODUCT DATA ----------
   let products = [
-    { id: 1, name: "Side Cover", category: "Side Cover", imgKey: "prod_img_1" },
-    { id: 2, name: "Chain Cover", category: "Chain Cover", imgKey: "prod_img_2" },
-    { id: 3, name: "Front Mud Guard", category: "Mud Guard", imgKey: "prod_img_3" },
-    { id: 4, name: "Headlight Visor", category: "Headlight Visor", imgKey: "prod_img_4" },
-    { id: 5, name: "Tank Side Cover", category: "Tank Side Cover", imgKey: "prod_img_5" },
-    { id: 6, name: "Rear Mud Guard", category: "Rear Mud Guard", imgKey: "prod_img_6" },
-    { id: 7, name: "Carbon Fiber Side Cover", category: "Side Cover", imgKey: "prod_img_7" },
-    { id: 8, name: "Street Chain Cover", category: "Chain Cover", imgKey: "prod_img_8" }
+    { id: 1, name: "Side Cover", category: "Side Cover", img: "https://picsum.photos/id/1/400/300" },
+    { id: 2, name: "Chain Cover", category: "Chain Cover", img: "https://picsum.photos/id/2/400/300" },
+    { id: 3, name: "Front Mud Guard", category: "Mud Guard", img: "https://picsum.photos/id/3/400/300" },
+    { id: 4, name: "Headlight Visor", category: "Headlight Visor", img: "https://picsum.photos/id/4/400/300" },
+    { id: 5, name: "Tank Side Cover", category: "Tank Side Cover", img: "https://picsum.photos/id/5/400/300" },
+    { id: 6, name: "Rear Mud Guard", category: "Rear Mud Guard", img: "https://picsum.photos/id/6/400/300" },
+    { id: 7, name: "Carbon Fiber Side Cover", category: "Side Cover", img: "https://picsum.photos/id/7/400/300" },
+    { id: 8, name: "Street Chain Cover", category: "Chain Cover", img: "https://picsum.photos/id/8/400/300" }
   ];
 
-  // Home hero image key
-  const HOME_HERO_KEY = "home_hero_image";
-  const DEFAULT_HERO_IMG = "https://picsum.photos/id/105/1600/600";
-
-  function getSavedImage(key, defaultUrl = null) {
-    const saved = localStorage.getItem(key);
-    return saved ? saved : defaultUrl;
-  }
-
-  function saveImage(key, dataUrl) {
-    localStorage.setItem(key, dataUrl);
-  }
-
-  // Update home hero image from storage
-  function updateHomeHeroImage() {
-    const imgEl = document.getElementById('homeHeroImg');
-    if (imgEl) {
-      imgEl.src = getSavedImage(HOME_HERO_KEY, DEFAULT_HERO_IMG);
-    }
-  }
-
-  // Render product grid
   function renderProductsGrid(containerId, filterCat = "all") {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -473,12 +500,11 @@
       return;
     }
     container.innerHTML = filtered.map(prod => {
-      const imgUrl = getSavedImage(prod.imgKey, null);
       return `
         <div class="product-card">
-          <div class="product-img" data-prodid="${prod.id}" data-imgkey="${prod.imgKey}" data-type="product">
-            ${imgUrl ? `<img src="${imgUrl}" alt="${prod.name}">` : `<i class="fas fa-motorcycle placeholder-icon"></i>`}
-            <div class="img-overlay"><i class="fas fa-camera"></i> Click to set image</div>
+          <div class="product-img">
+            <img src="${prod.img}" alt="${prod.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <i class="fas fa-motorcycle placeholder-icon" style="display: none;"></i>
           </div>
           <div class="product-info">
             <h3>${prod.name}</h3>
@@ -492,122 +518,59 @@
     document.querySelectorAll(`#${containerId} .order-now-btn`).forEach(btn => {
       btn.addEventListener('click', (e) => {
         let pname = btn.getAttribute('data-pname');
-        window.open(`https://wa.me/923126247387?text=Hi%20HCO%20Auto%20Parts%2C%20I%20want%20to%20order%20${encodeURIComponent(pname)}`, '_blank');
-      });
-    });
-
-    document.querySelectorAll(`#${containerId} .product-img`).forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const imgKey = el.getAttribute('data-imgkey');
-        openImageModal(imgKey, 'product');
+        window.open(`https://wa.me/923001431225?text=Hi%20HCO%20Auto%20Parts%2C%20I%20want%20to%20order%20${encodeURIComponent(pname)}`, '_blank');
       });
     });
   }
 
-  // Image Modal Logic
-  let currentImageKey = null;
-  let currentType = null;
-
-  function openImageModal(imgKey, type) {
-    currentImageKey = imgKey;
-    currentType = type;
-    document.getElementById('modalTitle').innerText = type === 'product' ? 'Upload Product Image' : 'Upload Home Image';
-    document.getElementById('imageModal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('imageModal').style.display = 'none';
-  }
-
-  document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
-  document.getElementById('modalConfirmBtn').addEventListener('click', () => {
-    const fileInput = document.getElementById('modalFileInput');
-    if (fileInput.files && fileInput.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const dataUrl = e.target.result;
-        saveImage(currentImageKey, dataUrl);
-        if (currentType === 'product') {
-          renderProductsGrid('homeProductsPreview', 'all');
-          const activeCatBtn = document.querySelector('#categoryFilterProducts .cat-btn.active');
-          renderProductsGrid('fullProductsGrid', activeCatBtn ? activeCatBtn.getAttribute('data-cat') : 'all');
-        } else if (currentType === 'homeHero') {
-          updateHomeHeroImage();
-        }
-        closeModal();
-      };
-      reader.readAsDataURL(fileInput.files[0]);
-    } else {
-      alert('Please select an image');
-    }
-  });
-
-  // Home hero click to change image
-  document.getElementById('homeHeroImageContainer')?.addEventListener('click', () => {
-    openImageModal(HOME_HERO_KEY, 'homeHero');
-  });
-
-  // Logo upload
-  function setupLogoUpload() {
-    const logoImg1 = document.getElementById('dynamicLogo');
-    const logoImg2 = document.getElementById('dynamicLogo2');
-    const logoAreas = [document.getElementById('logoClickArea'), document.getElementById('logoClickArea2')];
-    
-    function openLogoModal() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'image/*';
-      input.onchange = (e) => {
-        const file = e.target.files[0];
-        if(file) {
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            const data = ev.target.result;
-            if(logoImg1) logoImg1.src = data;
-            if(logoImg2) logoImg2.src = data;
-            localStorage.setItem('customLogo', data);
-          };
-          reader.readAsDataURL(file);
-        }
-      };
-      input.click();
-    }
-    logoAreas.forEach(area => { if(area) area.addEventListener('click', openLogoModal); });
-    
-    const savedLogo = localStorage.getItem('customLogo');
-    if(savedLogo && logoImg1) logoImg1.src = savedLogo;
-    if(savedLogo && logoImg2) logoImg2.src = savedLogo;
-  }
-
-  // Navigation
   const homePageDiv = document.getElementById('homePage');
   const productsPageDiv = document.getElementById('productsPage');
+  const contactPageDiv = document.getElementById('contactPage');
+
+  function hideAllPages() {
+    homePageDiv.style.display = 'none';
+    productsPageDiv.style.display = 'none';
+    if (contactPageDiv) contactPageDiv.style.display = 'none';
+  }
 
   function showHomePage() {
+    hideAllPages();
     homePageDiv.style.display = 'block';
-    productsPageDiv.style.display = 'none';
     window.scrollTo(0,0);
     renderProductsGrid('homeProductsPreview', 'all');
   }
 
   function showProductsPage() {
-    homePageDiv.style.display = 'none';
+    hideAllPages();
     productsPageDiv.style.display = 'block';
     window.scrollTo(0,0);
     const activeCat = document.querySelector('#categoryFilterProducts .cat-btn.active')?.getAttribute('data-cat') || 'all';
     renderProductsGrid('fullProductsGrid', activeCat);
   }
 
+  function showContactPage() {
+    hideAllPages();
+    if (contactPageDiv) contactPageDiv.style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  // Home page nav links
   document.getElementById('homeNavLink')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
-  document.getElementById('productsNavLink')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
-  document.getElementById('contactNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); setTimeout(() => document.getElementById('homeContactSection')?.scrollIntoView({behavior:'smooth'}), 100); });
+  document.getElementById('productsNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
+  document.getElementById('contactNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+
+  // Products page nav links
   document.getElementById('homeNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
   document.getElementById('productsNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
-  document.getElementById('contactNavLinkProducts')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); setTimeout(() => document.querySelector('#productsPage footer')?.scrollIntoView({behavior:'smooth'}), 100); });
+  document.getElementById('contactNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+
+  // Contact page nav links
+  document.getElementById('homeNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
+  document.getElementById('productsNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
+  document.getElementById('contactNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+
   document.getElementById('viewAllProductsBtnHome')?.addEventListener('click', () => showProductsPage());
 
-  // Category filter
   function setupCategoryFilter() {
     const btns = document.querySelectorAll('#categoryFilterProducts .cat-btn');
     btns.forEach(btn => {
@@ -619,25 +582,24 @@
     });
   }
 
-  // Mobile menu
   function mobileMenuToggle() {
-    const btn = document.getElementById('mobileMenuBtn');
-    const links = document.getElementById('navLinks');
+    const btn1 = document.getElementById('mobileMenuBtn');
+    const links1 = document.getElementById('navLinks');
     const btn2 = document.getElementById('mobileMenuBtn2');
     const links2 = document.getElementById('navLinks2');
-    if(btn && links) btn.addEventListener('click', () => links.classList.toggle('show'));
+    const btn3 = document.getElementById('mobileMenuBtn3');
+    const links3 = document.getElementById('navLinks3');
+    if(btn1 && links1) btn1.addEventListener('click', () => links1.classList.toggle('show'));
     if(btn2 && links2) btn2.addEventListener('click', () => links2.classList.toggle('show'));
+    if(btn3 && links3) btn3.addEventListener('click', () => links3.classList.toggle('show'));
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    updateHomeHeroImage();
     renderProductsGrid('homeProductsPreview', 'all');
     renderProductsGrid('fullProductsGrid', 'all');
     setupCategoryFilter();
-    setupLogoUpload();
     mobileMenuToggle();
     showHomePage();
-    document.getElementById('readMoreBtnHome')?.addEventListener('click', () => alert("HCO Auto Parts: Since 2014, premium motorcycle plastic parts manufacturer."));
   });
 </script>
 </body>
