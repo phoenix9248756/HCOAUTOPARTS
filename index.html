@@ -17,12 +17,95 @@
       background-color: #fefefe;
       color: #1e1e2a;
       line-height: 1.5;
+      overflow-x: hidden;
     }
     .container {
       max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px;
     }
+
+    /* ========== KEYFRAMES ========== */
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInLeft {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      0% { opacity: 0; transform: translateX(30px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes scaleIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 34, 43, 0.6); }
+      70% { transform: scale(1.03); box-shadow: 0 0 20px 8px rgba(227, 34, 43, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(227, 34, 43, 0); }
+    }
+    @keyframes rgbBorder {
+      0% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.2); }
+      16% { border-color: #ff8800; box-shadow: 0 0 15px rgba(255, 136, 0, 0.4), 0 0 30px rgba(255, 136, 0, 0.2); }
+      33% { border-color: #ffff00; box-shadow: 0 0 15px rgba(255, 255, 0, 0.4), 0 0 30px rgba(255, 255, 0, 0.2); }
+      50% { border-color: #00ff00; box-shadow: 0 0 15px rgba(0, 255, 0, 0.4), 0 0 30px rgba(0, 255, 0, 0.2); }
+      66% { border-color: #0088ff; box-shadow: 0 0 15px rgba(0, 136, 255, 0.4), 0 0 30px rgba(0, 136, 255, 0.2); }
+      83% { border-color: #8800ff; box-shadow: 0 0 15px rgba(136, 0, 255, 0.4), 0 0 30px rgba(136, 0, 255, 0.2); }
+      100% { border-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.2); }
+    }
+    @keyframes rgbBorderHover {
+      0% { border-color: #ff0044; box-shadow: 0 0 25px rgba(255, 0, 68, 0.7), 0 0 50px rgba(255, 0, 68, 0.4), 0 15px 35px rgba(227,34,43,0.3); }
+      16% { border-color: #ff6600; box-shadow: 0 0 25px rgba(255, 102, 0, 0.7), 0 0 50px rgba(255, 102, 0, 0.4), 0 15px 35px rgba(255,102,0,0.3); }
+      33% { border-color: #ffdd00; box-shadow: 0 0 25px rgba(255, 221, 0, 0.7), 0 0 50px rgba(255, 221, 0, 0.4), 0 15px 35px rgba(255,221,0,0.3); }
+      50% { border-color: #00ff44; box-shadow: 0 0 25px rgba(0, 255, 68, 0.7), 0 0 50px rgba(0, 255, 68, 0.4), 0 15px 35px rgba(0,255,68,0.3); }
+      66% { border-color: #0088ff; box-shadow: 0 0 25px rgba(0, 136, 255, 0.7), 0 0 50px rgba(0, 136, 255, 0.4), 0 15px 35px rgba(0,136,255,0.3); }
+      83% { border-color: #aa00ff; box-shadow: 0 0 25px rgba(170, 0, 255, 0.7), 0 0 50px rgba(170, 0, 255, 0.4), 0 15px 35px rgba(170,0,255,0.3); }
+      100% { border-color: #ff0044; box-shadow: 0 0 25px rgba(255, 0, 68, 0.7), 0 0 50px rgba(255, 0, 68, 0.4), 0 15px 35px rgba(255,0,68,0.3); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 8px rgba(227,34,43,0.5); }
+      50% { box-shadow: 0 0 20px rgba(227,34,43,0.8), 0 0 30px rgba(227,34,43,0.4); }
+    }
+    @keyframes floatStars {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-12px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.7; }
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* Ripple */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+
+    /* Reveal */
+    .reveal, .reveal-left, .reveal-right, .reveal-scale {
+      opacity: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal { transform: translateY(25px); }
+    .reveal-left { transform: translateX(-25px); }
+    .reveal-right { transform: translateX(25px); }
+    .reveal-scale { transform: scale(0.9); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+      opacity: 1;
+      transform: translate(0) scale(1);
+    }
+
     /* Navbar */
     .navbar {
       background: #0b0c10;
@@ -44,102 +127,132 @@
       display: flex;
       align-items: center;
       gap: 15px;
-      flex-wrap: wrap;
       cursor: pointer;
+      transition: transform 0.3s;
     }
+    .logo-area:hover { transform: scale(1.02); }
     .logo-img {
-      width: 50px;
-      height: 50px;
+      width: 50px; height: 50px;
       object-fit: contain;
-      background: transparent;
-      border-radius: 0;
-      padding: 0;
-      transition: 0.2s;
+      transition: 0.3s;
     }
-    .logo-img:hover {
-      opacity: 0.8;
-    }
+    .logo-img:hover { opacity: 0.8; transform: rotate(5deg); }
     .logo-text h1 {
-      color: white;
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      color: white; font-size: 1.6rem; font-weight: 800;
     }
     .logo-text span { color: #e3222b; }
     .logo-text p { color: #ccc; font-size: 0.7rem; }
     .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
+      display: flex; gap: 22px; list-style: none; flex-wrap: wrap;
     }
     .nav-links a {
-      color: #f0f0f0;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s;
-      font-size: 1rem;
+      color: #f0f0f0; text-decoration: none;
+      font-weight: 600; font-size: 0.95rem;
+      position: relative; padding-bottom: 6px;
+      transition: color 0.3s; white-space: nowrap;
     }
+    .nav-links a::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: #e3222b;
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
     .nav-links a:hover, .nav-links a.active { color: #e3222b; }
     .mobile-menu {
-      display: none;
-      font-size: 1.8rem;
-      color: white;
-      cursor: pointer;
+      display: none; font-size: 1.8rem;
+      color: white; cursor: pointer;
     }
+
     /* Buttons */
     .btn-primary {
-      background: #e3222b;
-      padding: 12px 32px;
-      border-radius: 40px;
-      font-weight: 700;
-      color: white;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: none;
-      cursor: pointer;
-      transition: 0.2s;
+      background: linear-gradient(135deg, #e3222b, #c41a23);
+      padding: 14px 36px; border-radius: 50px;
+      font-weight: 700; color: white;
+      text-decoration: none; display: inline-flex;
+      align-items: center; gap: 10px;
+      border: none; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      box-shadow: 0 8px 20px rgba(227,34,43,0.4);
+      letter-spacing: 0.5px;
     }
-    .btn-primary:hover { background: #b71c24; transform: translateY(-2px); }
+    .btn-primary::before {
+      content: ''; position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transition: left 0.5s;
+    }
+    .btn-primary:hover::before { left: 100%; }
+    .btn-primary:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(227,34,43,0.6);
+      background: linear-gradient(135deg, #ff2a35, #e3222b);
+    }
+    .btn-primary:active { transform: scale(0.96); }
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      box-shadow: 0 8px 20px rgba(37,211,102,0.4);
+    }
+    .btn-whatsapp:hover {
+      box-shadow: 0 15px 30px rgba(37,211,102,0.6);
+      background: linear-gradient(135deg, #2ecc71, #25D366);
+    }
+
     /* Features */
     .features-strip {
-      background: white;
-      padding: 45px 0;
+      background: white; padding: 45px 0;
       border-bottom: 1px solid #eee;
     }
     .features-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; gap: 30px;
       text-align: center;
     }
-    .feature-card { flex: 1; min-width: 170px; }
-    .feature-card i { font-size: 2.5rem; color: #e3222b; margin-bottom: 12px; }
+    .feature-card {
+      flex: 1; min-width: 170px;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      padding: 15px 10px; border-radius: 24px;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+      background: #fafafa;
+    }
+    .feature-card i {
+      font-size: 2.5rem; color: #e3222b;
+      margin-bottom: 12px;
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .feature-card:hover i {
+      transform: scale(1.2) rotate(5deg);
+      color: #c41a23;
+    }
     .feature-card h4 { font-size: 1.3rem; font-weight: 800; }
-    /* Home Hero Image Section */
+
+    /* Hero */
     .home-hero-image {
-      position: relative;
-      width: 100%;
-      background: #0b0c10;
+      width: 100%; background: #0b0c10;
       overflow: hidden;
+      animation: scaleIn 1s ease-out;
     }
     .home-hero-image img {
-      width: 100%;
-      height: auto;
-      max-height: 520px;
-      object-fit: cover;
+      width: 100%; height: auto;
+      max-height: 520px; object-fit: cover;
       display: block;
+      transition: transform 0.6s;
     }
-    /* Products Grid */
+    .home-hero-image:hover img { transform: scale(1.03); }
+
     .section-title {
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: 800;
-      margin: 60px 0 30px;
+      text-align: center; font-size: 2.2rem;
+      font-weight: 800; margin: 60px 0 30px;
     }
     .section-title span { color: #e3222b; }
+
+    /* Products Grid */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -148,13 +261,18 @@
     }
     .product-card {
       background: white;
-      border-radius: 24px;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      transition: 0.2s;
-      border: 1px solid #eee;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      position: relative;
+      border: 3px solid #ff0000;
+      animation: rgbBorder 4s linear infinite;
     }
-    .product-card:hover { transform: translateY(-6px); }
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      animation: rgbBorderHover 2s linear infinite;
+    }
     .product-img {
       background: #f9f9fc;
       height: 200px;
@@ -164,155 +282,448 @@
       overflow: hidden;
     }
     .product-img img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    }
+    .product-card:hover .product-img img {
+      transform: scale(1.12) rotate(0.5deg);
     }
     .product-img .placeholder-icon {
-      font-size: 4rem;
-      color: #e3222b;
+      font-size: 4rem; color: #e3222b;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    .product-info { padding: 18px; }
-    .product-info h3 { font-size: 1.3rem; font-weight: 700; }
+    .product-card:hover .placeholder-icon {
+      transform: scale(1.3) rotate(10deg);
+    }
+    .product-info { padding: 20px; }
+    .product-info h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
+    .product-info .category-badge {
+      display: inline-block;
+      background: #f0f0f5;
+      padding: 4px 12px; border-radius: 20px;
+      font-size: 0.8rem; color: #666;
+      margin-bottom: 12px;
+    }
     .order-now {
-      background: #0b0c10;
+      background: linear-gradient(135deg, #0b0c10, #1a1c24);
       color: white;
-      border: none;
-      padding: 10px 0;
-      width: 100%;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 12px;
+      border: 2px solid transparent;
+      padding: 12px 0; width: 100%;
+      border-radius: 40px;
+      font-weight: 700; cursor: pointer;
+      font-size: 0.95rem; letter-spacing: 0.5px;
+      position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: flex; align-items: center;
+      justify-content: center; gap: 8px;
     }
-    .order-now:hover { background: #e3222b; }
-    .contact-about {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin: 50px 0;
+    .order-now::before {
+      content: ''; position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.6s;
     }
-    .contact-card, .about-card {
-      flex: 1;
-      background: #fbfbfd;
-      border-radius: 32px;
-      padding: 32px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-      border: 1px solid #eceef2;
+    .order-now:hover::before { left: 100%; }
+    .order-now:hover {
+      background: linear-gradient(135deg, #e3222b, #ff2a35);
+      border-color: #e3222b;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(227,34,43,0.45);
+      letter-spacing: 1px;
     }
-    footer {
-      background: #0b0c10;
-      color: #b0b3c0;
-      padding: 40px 0 20px;
-      margin-top: 40px;
-    }
-    .footer-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 40px;
-    }
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25D366;
-      color: white;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      z-index: 99;
-      text-decoration: none;
-    }
+
+    /* Category buttons */
     .categories-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 14px;
       margin-bottom: 40px;
     }
     .cat-btn {
-      background: #f0f2f5;
-      border: none;
-      padding: 8px 24px;
-      border-radius: 40px;
-      font-weight: 600;
-      cursor: pointer;
+      background: rgba(240, 242, 245, 0.8);
+      backdrop-filter: blur(10px);
+      border: 2px solid transparent;
+      padding: 10px 28px; border-radius: 50px;
+      font-weight: 700; cursor: pointer;
+      font-size: 0.9rem; letter-spacing: 0.3px;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+      position: relative; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .cat-btn.active, .cat-btn:hover { background: #e3222b; color: white; }
-    /* Contact Page Specific */
-    .contact-page-hero {
-      background: linear-gradient(120deg, #111217, #1d1e2c);
-      padding: 50px 0;
+    .cat-btn::before {
+      content: ''; position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    .cat-btn:hover::before { left: 100%; }
+    .cat-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-color: rgba(227,34,43,0.3);
+      background: white;
+    }
+    .cat-btn.active {
+      background: linear-gradient(135deg, #e3222b, #c41a23);
+      color: white; border-color: #e3222b;
+      box-shadow: 0 8px 20px rgba(227,34,43,0.5);
+      animation: glowPulse 2.5s infinite;
+    }
+
+    /* ========== ABOUT PAGE STYLES ========== */
+    .about-hero {
+      background: linear-gradient(135deg, #0b0c10 0%, #1d1e2c 50%, #111217 100%);
+      padding: 70px 0 50px;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(227,34,43,0.1) 0%, transparent 70%);
+      animation: pulse 4s infinite;
+    }
+    .about-hero h1 {
+      font-size: 3rem; font-weight: 800;
+      position: relative; z-index: 1;
+    }
+    .about-hero h1 span { color: #e3222b; }
+    .about-hero .subtitle {
+      color: #ccc; font-size: 1.2rem;
+      position: relative; z-index: 1;
+      margin-top: 10px;
+    }
+    .about-mission {
+      display: flex; flex-wrap: wrap;
+      gap: 40px; margin: 50px 0;
+      align-items: center;
+    }
+    .about-mission-text {
+      flex: 1; min-width: 280px;
+    }
+    .about-mission-text h2 {
+      font-size: 2rem; font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .about-mission-text h2 span { color: #e3222b; }
+    .about-mission-text p {
+      color: #555; line-height: 1.8;
+      margin-bottom: 15px; font-size: 1.05rem;
+    }
+    .about-mission-image {
+      flex: 1; min-width: 280px;
+      border-radius: 32px; overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+    .about-mission-image img {
+      width: 100%; height: auto;
+      display: block; object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .about-mission-image:hover img { transform: scale(1.05); }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px; margin: 50px 0;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px 20px;
+      text-align: center;
+      border: 2px solid #eee;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card:hover {
+      border-color: #e3222b;
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(227,34,43,0.1);
+    }
+    .stat-card .stat-number {
+      font-size: 3rem; font-weight: 800;
+      color: #e3222b; display: block;
+    }
+    .stat-card .stat-label {
+      color: #666; font-weight: 600;
+      margin-top: 8px;
+    }
+    .stat-card i {
+      font-size: 2rem; color: #e3222b;
+      margin-bottom: 10px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px; margin: 40px 0;
+    }
+    .team-card {
+      background: white;
+      border-radius: 24px;
+      padding: 25px;
+      text-align: center;
+      border: 2px solid #eee;
+      transition: all 0.4s ease;
+    }
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      border-color: #e3222b;
+    }
+    .team-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e3222b, #0b0c10);
+      margin: 0 auto 15px;
+      display: flex; align-items: center;
+      justify-content: center;
+      font-size: 2.5rem; color: white;
+      transition: transform 0.3s;
+    }
+    .team-card:hover .team-avatar {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .team-card h4 { font-weight: 700; margin-bottom: 4px; }
+    .team-card .role { color: #e3222b; font-weight: 600; font-size: 0.9rem; }
+
+    /* ========== REVIEWS PAGE STYLES ========== */
+    .reviews-hero {
+      background: linear-gradient(135deg, #111217, #1d1e2c);
+      padding: 60px 0;
       text-align: center;
       color: white;
     }
-    .contact-details-large {
+    .reviews-hero h1 { font-size: 2.8rem; font-weight: 800; }
+    .reviews-hero h1 span { color: #e3222b; }
+    
+    .reviews-summary {
+      display: flex; flex-wrap: wrap;
+      gap: 30px; margin: -30px auto 40px;
       background: white;
       border-radius: 32px;
-      padding: 48px;
-      margin: -30px auto 40px;
+      padding: 40px;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-    .contact-info-item {
-      flex: 1;
-      min-width: 200px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-    .contact-icon-circle {
-      background: #e3222b;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
+      position: relative; z-index: 2;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 1.4rem;
+    }
+    .rating-big {
+      text-align: center;
+      padding: 20px;
+    }
+    .rating-big .number {
+      font-size: 4rem; font-weight: 800;
+      color: #e3222b; line-height: 1;
+    }
+    .rating-big .stars {
+      color: #ffc107; font-size: 1.5rem;
+      margin: 8px 0;
+    }
+    .rating-big .count {
+      color: #888; font-size: 0.9rem;
+    }
+    .rating-bars {
+      flex: 1; min-width: 250px;
+    }
+    .rating-bar-row {
+      display: flex; align-items: center;
+      gap: 10px; margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .rating-bar-row .bar {
+      flex: 1; height: 8px;
+      background: #eee; border-radius: 10px;
+      overflow: hidden;
+    }
+    .rating-bar-row .bar-fill {
+      height: 100%; background: #e3222b;
+      border-radius: 10px; transition: width 1s ease;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+    .review-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      border: 2px solid #eee;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .review-card:hover {
+      border-color: #e3222b;
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(227,34,43,0.08);
+    }
+    .review-card .review-stars {
+      color: #ffc107; font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    .review-card .review-text {
+      color: #444; line-height: 1.7;
+      margin-bottom: 16px; font-style: italic;
+      position: relative; padding-left: 20px;
+    }
+    .review-card .review-text::before {
+      content: '"'; position: absolute;
+      left: 0; top: -5px;
+      font-size: 2rem; color: #e3222b;
+      font-weight: 800; font-style: normal;
+    }
+    .review-card .reviewer {
+      display: flex; align-items: center;
+      gap: 12px; border-top: 1px solid #eee;
+      padding-top: 16px;
+    }
+    .review-card .reviewer-avatar {
+      width: 45px; height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e3222b, #c41a23);
+      display: flex; align-items: center;
+      justify-content: center;
+      color: white; font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .review-card .reviewer-name {
+      font-weight: 700;
+    }
+    .review-card .reviewer-date {
+      font-size: 0.8rem; color: #999;
+    }
+    .review-card .verified {
+      color: #25D366; font-size: 0.8rem;
+      margin-left: auto;
+    }
+    .review-card .verified i { margin-right: 4px; }
+
+    .submit-review {
+      background: linear-gradient(135deg, #f9f9fc, #fff);
+      border-radius: 32px;
+      padding: 40px;
+      text-align: center;
+      margin: 40px 0;
+      border: 2px dashed #ddd;
+      transition: all 0.3s;
+    }
+    .submit-review:hover {
+      border-color: #e3222b;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    .star-rating-input {
+      display: flex; justify-content: center;
+      gap: 8px; margin: 15px 0;
+      font-size: 2rem; cursor: pointer;
+      direction: rtl;
+    }
+    .star-rating-input i {
+      color: #ddd; transition: color 0.2s;
+    }
+    .star-rating-input i:hover,
+    .star-rating-input i:hover ~ i {
+      color: #ffc107;
+    }
+    .review-textarea {
+      width: 100%; max-width: 500px;
+      padding: 15px; border-radius: 20px;
+      border: 2px solid #eee; margin: 10px 0;
+      font-family: inherit; resize: vertical;
+      transition: border-color 0.3s;
+    }
+    .review-textarea:focus {
+      outline: none; border-color: #e3222b;
+    }
+
+    /* Contact */
+    .contact-page-hero {
+      background: linear-gradient(120deg, #111217, #1d1e2c);
+      padding: 50px 0; text-align: center; color: white;
+    }
+    .contact-details-large {
+      background: white; border-radius: 32px;
+      padding: 48px; margin: -30px auto 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      display: flex; flex-wrap: wrap; gap: 40px;
+      transition: transform 0.3s;
+    }
+    .contact-details-large:hover { transform: translateY(-5px); }
+    .contact-info-item {
+      flex: 1; min-width: 200px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .contact-icon-circle {
+      background: #e3222b; width: 50px; height: 50px;
+      border-radius: 50%; display: flex;
+      align-items: center; justify-content: center;
+      color: white; font-size: 1.4rem;
+      transition: 0.3s;
+    }
+    .contact-info-item:hover .contact-icon-circle {
+      transform: rotate(10deg) scale(1.1);
     }
     .map-container {
-      border-radius: 28px;
-      overflow: hidden;
+      border-radius: 28px; overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      margin: 30px 0;
-      border: 1px solid #eee;
+      margin: 30px 0; border: 1px solid #eee;
     }
     .map-container iframe {
-      width: 100%;
-      height: 350px;
-      border: none;
-      display: block;
+      width: 100%; height: 350px; border: none;
     }
+
+    footer {
+      background: #0b0c10; color: #b0b3c0;
+      padding: 40px 0 20px; margin-top: 40px;
+    }
+    .footer-grid {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; gap: 40px;
+    }
+    .footer-col ul { list-style: none; padding: 0; }
+    .footer-col ul li { margin-bottom: 6px; cursor: pointer; }
+    .footer-col ul li:hover { color: #e3222b; }
+    .whatsapp-float {
+      position: fixed; bottom: 30px; right: 30px;
+      background: #25D366; color: white;
+      width: 55px; height: 55px; border-radius: 50%;
+      display: flex; align-items: center;
+      justify-content: center; font-size: 2rem;
+      z-index: 99; text-decoration: none;
+      box-shadow: 0 10px 20px rgba(37,211,102,0.4);
+      animation: pulse 2s infinite;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.15);
+      box-shadow: 0 15px 25px rgba(37,211,102,0.6);
+    }
+
     @media (max-width: 780px) {
       .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        background: #0b0c10;
-        padding: 20px;
-        border-radius: 20px;
+        display: none; width: 100%;
+        flex-direction: column; background: #0b0c10;
+        padding: 20px; border-radius: 20px;
       }
       .nav-links.show { display: flex; }
       .mobile-menu { display: block; }
       .home-hero-image img { max-height: 380px; }
-      .contact-details-large {
-        padding: 24px;
-        margin: -20px 12px 30px;
-      }
-      .map-container iframe {
-        height: 280px;
-      }
+      .contact-details-large { padding: 24px; margin: -20px 12px 30px; }
+      .map-container iframe { height: 280px; }
+      .about-hero h1 { font-size: 2rem; }
+      .reviews-hero h1 { font-size: 2rem; }
+      .reviews-summary { padding: 25px; }
+      .rating-big .number { font-size: 3rem; }
     }
   </style>
 </head>
@@ -322,47 +733,50 @@
 <div id="homePage">
   <div class="navbar">
     <div class="container nav-flex">
-      <div class="logo-area">
-     <img class="logo-img" src="logo.png" alt="Logo">
+      <div class="logo-area reveal-left">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
         <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
       </div>
       <div class="mobile-menu" id="mobileMenuBtn"><i class="fas fa-bars"></i></div>
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links reveal-right" id="navLinks">
         <li><a href="#" id="homeNavLink" class="active">Home</a></li>
         <li><a href="#" id="productsNavLinkHome">Products</a></li>
+        <li><a href="#" id="aboutNavLinkHome">About</a></li>
+        <li><a href="#" id="reviewsNavLinkHome">Reviews</a></li>
         <li><a href="#" id="contactNavLinkHome">Contact</a></li>
       </ul>
     </div>
   </div>
 
-<div class="home-hero-image">
-    <img src="home-image.png" alt="Premium Motorcycle Parts">
-</div>
+  <div class="home-hero-image reveal-scale">
+    <img src="https://placehold.co/1200x520/0b0c10/ffffff?text=HCO+Premium+Motorcycle+Parts" alt="Premium Motorcycle Parts">
+  </div>
+
   <div class="features-strip">
     <div class="container features-grid">
-      <div class="feature-card"><i class="fas fa-industry"></i><h4>FACTORY DIRECT</h4><p>Best Wholesale Prices</p></div>
-      <div class="feature-card"><i class="fas fa-gem"></i><h4>PREMIUM QUALITY</h4><p>Durable & Long Lasting</p></div>
-      <div class="feature-card"><i class="fas fa-boxes"></i><h4>BULK ORDERS</h4><p>Large Production Capacity</p></div>
-      <div class="feature-card"><i class="fas fa-truck-fast"></i><h4>FAST DELIVERY</h4><p>All Over Pakistan</p></div>
+      <div class="feature-card reveal"><i class="fas fa-industry"></i><h4>FACTORY DIRECT</h4><p>Best Wholesale Prices</p></div>
+      <div class="feature-card reveal"><i class="fas fa-gem"></i><h4>PREMIUM QUALITY</h4><p>Durable & Long Lasting</p></div>
+      <div class="feature-card reveal"><i class="fas fa-boxes"></i><h4>BULK ORDERS</h4><p>Large Production Capacity</p></div>
+      <div class="feature-card reveal"><i class="fas fa-truck-fast"></i><h4>FAST DELIVERY</h4><p>All Over Pakistan</p></div>
     </div>
   </div>
 
   <div class="container">
-    <h2 class="section-title">OUR <span>BEST SELLERS</span></h2>
+    <h2 class="section-title reveal">OUR <span>BEST SELLERS</span></h2>
     <div id="homeProductsPreview" class="products-grid"></div>
-    <div style="text-align: center; margin-bottom: 40px;">
-      <button id="viewAllProductsBtnHome" class="btn-primary"><i class="fas fa-eye"></i> VIEW ALL PRODUCTS</button>
+    <div style="text-align: center; margin-bottom: 40px;" class="reveal">
+      <button id="viewAllProductsBtnHome" class="btn-primary ripple"><i class="fas fa-eye"></i> VIEW ALL PRODUCTS</button>
     </div>
   </div>
 
   <div class="container" style="text-align:center; margin: 30px auto 50px;">
-    <div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;">
+    <div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;" class="reveal-scale">
       <h3>READY TO PLACE YOUR ORDER?</h3>
       <p style="margin: 16px 0;">Contact us now on WhatsApp for best wholesale prices.</p>
-      <a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> CONTACT ON WHATSAPP</a>
+      <a href="https://wa.me/923001431225" class="btn-primary btn-whatsapp ripple"><i class="fab fa-whatsapp"></i> CONTACT ON WHATSAPP</a>
     </div>
   </div>
-  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>PRODUCTS</h4><ul><li>Side Cover</li><li>Chain Cover</li><li>Mud Guard</li><li>Headlight Visor</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>About</li><li>Reviews</li><li>Contact</li></ul></div><div class="footer-col"><h4>PRODUCTS</h4><ul><li>Side Cover</li><li>Chain Cover</li><li>Mud Guard</li><li>Headlight Visor</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
 </div>
 
 <!-- PRODUCTS PAGE -->
@@ -377,13 +791,15 @@
       <ul class="nav-links" id="navLinks2">
         <li><a href="#" id="homeNavLink2">Home</a></li>
         <li><a href="#" id="productsNavLink2" class="active">Products</a></li>
+        <li><a href="#" id="aboutNavLink2">About</a></li>
+        <li><a href="#" id="reviewsNavLink2">Reviews</a></li>
         <li><a href="#" id="contactNavLink2">Contact</a></li>
       </ul>
     </div>
   </div>
   <div class="container">
-    <div class="section-title">OUR <span>PRODUCTS</span></div>
-    <div class="categories-bar" id="categoryFilterProducts">
+    <div class="section-title reveal">OUR <span>PRODUCTS</span></div>
+    <div class="categories-bar reveal" id="categoryFilterProducts">
       <button class="cat-btn active" data-cat="all">All Products</button>
       <button class="cat-btn" data-cat="Side Cover">Side Cover</button>
       <button class="cat-btn" data-cat="Chain Cover">Chain Cover</button>
@@ -394,8 +810,174 @@
     </div>
     <div id="fullProductsGrid" class="products-grid"></div>
   </div>
-  <div class="container" style="text-align:center; margin: 30px auto;"><div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;"><h3>NEED BULK ORDER?</h3><p>Contact us for wholesale prices.</p><a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a></div></div>
-  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+  <div class="container" style="text-align:center; margin: 30px auto;">
+    <div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;" class="reveal-scale">
+      <h3>NEED BULK ORDER?</h3><p>Contact us for wholesale prices.</p>
+      <a href="https://wa.me/923001431225" class="btn-primary btn-whatsapp ripple"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+    </div>
+  </div>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>About</li><li>Reviews</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts.</div></footer>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="aboutPage" style="display: none;">
+  <div class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-area">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
+        <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
+      </div>
+      <div class="mobile-menu" id="mobileMenuBtn4"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links" id="navLinks4">
+        <li><a href="#" id="homeNavLink4">Home</a></li>
+        <li><a href="#" id="productsNavLink4">Products</a></li>
+        <li><a href="#" id="aboutNavLink4" class="active">About</a></li>
+        <li><a href="#" id="reviewsNavLink4">Reviews</a></li>
+        <li><a href="#" id="contactNavLink4">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="about-hero reveal">
+    <h1>ABOUT <span>HCO AUTOPARTS</span></h1>
+    <p class="subtitle">Pakistan's Trusted Motorcycle Plastic Parts Manufacturer</p>
+  </div>
+
+  <div class="container">
+    <div class="about-mission">
+      <div class="about-mission-text reveal-left">
+        <h2>OUR <span>MISSION</span></h2>
+        <p>At HCO Auto Parts, we are dedicated to manufacturing premium quality motorcycle plastic parts that combine durability with perfect fit. Established in Lahore's Sunday Industrial Area, we have grown to become one of Pakistan's most trusted names in motorcycle spare parts.</p>
+        <p>Our state-of-the-art manufacturing facility uses advanced injection molding technology to produce parts that meet international quality standards. Every product undergoes rigorous quality control before reaching our customers.</p>
+        <p>We believe in building long-term relationships with our clients by providing consistent quality, competitive wholesale pricing, and reliable delivery across Pakistan.</p>
+      </div>
+      <div class="about-mission-image reveal-right">
+        <img src="https://picsum.photos/id/60/600/400" alt="HCO Factory">
+      </div>
+    </div>
+
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <i class="fas fa-calendar-check"></i>
+        <span class="stat-number">15+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-boxes"></i>
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Product Varieties</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-users"></i>
+        <span class="stat-number">10,000+</span>
+        <span class="stat-label">Happy Customers</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-city"></i>
+        <span class="stat-number">200+</span>
+        <span class="stat-label">Cities Served</span>
+      </div>
+    </div>
+
+    <h2 class="section-title reveal">MEET OUR <span>TEAM</span></h2>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-avatar"><i class="fas fa-user-tie"></i></div>
+        <h4>Muhammad Usman</h4>
+        <p class="role">Founder & CEO</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><i class="fas fa-cogs"></i></div>
+        <h4>Ali Raza</h4>
+        <p class="role">Production Manager</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><i class="fas fa-chart-line"></i></div>
+        <h4>Ahmed Khan</h4>
+        <p class="role">Sales Director</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar"><i class="fas fa-clipboard-check"></i></div>
+        <h4>Bilal Hussain</h4>
+        <p class="role">Quality Control</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="text-align:center; margin: 30px auto;">
+    <div style="background: linear-gradient(120deg,#111217,#1d1e2c); border-radius: 48px; padding: 40px 20px; color: white;" class="reveal-scale">
+      <h3>WANT TO WORK WITH US?</h3><p>Contact us for wholesale inquiries.</p>
+      <a href="https://wa.me/923001431225" class="btn-primary btn-whatsapp ripple"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+    </div>
+  </div>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>About</li><li>Reviews</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts.</div></footer>
+</div>
+
+<!-- REVIEWS PAGE -->
+<div id="reviewsPage" style="display: none;">
+  <div class="navbar">
+    <div class="container nav-flex">
+      <div class="logo-area">
+        <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e3222b'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold'%3EH%3C/text%3E%3C/svg%3E" alt="Logo">
+        <div class="logo-text"><h1>HCO <span>AUTOPARTS</span></h1><p>Premium Quality Motorcycle Plastic</p></div>
+      </div>
+      <div class="mobile-menu" id="mobileMenuBtn5"><i class="fas fa-bars"></i></div>
+      <ul class="nav-links" id="navLinks5">
+        <li><a href="#" id="homeNavLink5">Home</a></li>
+        <li><a href="#" id="productsNavLink5">Products</a></li>
+        <li><a href="#" id="aboutNavLink5">About</a></li>
+        <li><a href="#" id="reviewsNavLink5" class="active">Reviews</a></li>
+        <li><a href="#" id="contactNavLink5">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="reviews-hero reveal">
+    <div class="container">
+      <h1>CUSTOMER <span>REVIEWS</span></h1>
+      <p style="color: #ccc; margin-top: 10px;">See what our customers say about us</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="reviews-summary reveal-scale">
+      <div class="rating-big">
+        <div class="number">4.8</div>
+        <div class="stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <div class="count">Based on 850+ Reviews</div>
+      </div>
+      <div class="rating-bars">
+        <div class="rating-bar-row">5 <i class="fas fa-star" style="color:#ffc107; font-size:0.7rem;"></i> <div class="bar"><div class="bar-fill" style="width:82%"></div></div> 82%</div>
+        <div class="rating-bar-row">4 <i class="fas fa-star" style="color:#ffc107; font-size:0.7rem;"></i> <div class="bar"><div class="bar-fill" style="width:14%"></div></div> 14%</div>
+        <div class="rating-bar-row">3 <i class="fas fa-star" style="color:#ffc107; font-size:0.7rem;"></i> <div class="bar"><div class="bar-fill" style="width:3%"></div></div> 3%</div>
+        <div class="rating-bar-row">2 <i class="fas fa-star" style="color:#ffc107; font-size:0.7rem;"></i> <div class="bar"><div class="bar-fill" style="width:1%"></div></div> 1%</div>
+        <div class="rating-bar-row">1 <i class="fas fa-star" style="color:#ffc107; font-size:0.7rem;"></i> <div class="bar"><div class="bar-fill" style="width:0%"></div></div> 0%</div>
+      </div>
+    </div>
+
+    <div class="reviews-grid reveal" id="reviewsGrid">
+      <!-- Reviews will be rendered by JS -->
+    </div>
+
+    <div class="submit-review reveal-scale">
+      <h3 style="margin-bottom: 8px;">LEAVE A REVIEW</h3>
+      <p style="color: #888; margin-bottom: 10px;">Share your experience with HCO Auto Parts</p>
+      <div class="star-rating-input" id="starRatingInput">
+        <i class="fas fa-star" data-value="5"></i>
+        <i class="fas fa-star" data-value="4"></i>
+        <i class="fas fa-star" data-value="3"></i>
+        <i class="fas fa-star" data-value="2"></i>
+        <i class="fas fa-star" data-value="1"></i>
+      </div>
+      <textarea class="review-textarea" id="reviewTextarea" rows="3" placeholder="Write your review here..."></textarea>
+      <br>
+      <button class="btn-primary ripple" id="submitReviewBtn"><i class="fas fa-paper-plane"></i> SUBMIT REVIEW</button>
+    </div>
+  </div>
+
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>About</li><li>Reviews</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>mughal241023@gmail.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts.</div></footer>
 </div>
 
 <!-- CONTACT PAGE -->
@@ -410,12 +992,14 @@
       <ul class="nav-links" id="navLinks3">
         <li><a href="#" id="homeNavLink3">Home</a></li>
         <li><a href="#" id="productsNavLink3">Products</a></li>
+        <li><a href="#" id="aboutNavLink3">About</a></li>
+        <li><a href="#" id="reviewsNavLink3">Reviews</a></li>
         <li><a href="#" id="contactNavLink3" class="active">Contact</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="contact-page-hero">
+  <div class="contact-page-hero reveal">
     <div class="container">
       <h1 style="font-size: 2.4rem; margin-bottom: 10px;">GET IN TOUCH</h1>
       <p style="color: #ccc;">We'd love to hear from you. Reach out for any query or bulk order.</p>
@@ -423,56 +1007,29 @@
   </div>
 
   <div class="container">
-    <div class="contact-details-large">
-      <div class="contact-info-item">
-        <div class="contact-icon-circle"><i class="fas fa-phone-alt"></i></div>
-        <div>
-          <h4 style="font-weight: 700; margin-bottom: 4px;">Phone</h4>
-          <p style="color: #555;">03026628657</p>
-        </div>
-      </div>
-      <div class="contact-info-item">
-        <div class="contact-icon-circle"><i class="fas fa-envelope"></i></div>
-        <div>
-          <h4 style="font-weight: 700; margin-bottom: 4px;">Email</h4>
-          <p style="color: #555;">mughal241023@gmail.com</p>
-        </div>
-      </div>
-      <div class="contact-info-item">
-        <div class="contact-icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-        <div>
-          <h4 style="font-weight: 700; margin-bottom: 4px;">Address</h4>
-          <p style="color: #555;">Sunday Industrial Area, Lahore, Pakistan</p>
-        </div>
-      </div>
+    <div class="contact-details-large reveal-scale">
+      <div class="contact-info-item"><div class="contact-icon-circle"><i class="fas fa-phone-alt"></i></div><div><h4>Phone</h4><p>03026628657</p></div></div>
+      <div class="contact-info-item"><div class="contact-icon-circle"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><p>mughal241023@gmail.com</p></div></div>
+      <div class="contact-info-item"><div class="contact-icon-circle"><i class="fas fa-map-marker-alt"></i></div><div><h4>Address</h4><p>Sunday Industrial Area, Lahore</p></div></div>
     </div>
 
-    <!-- LIVE LOCATION MAP -->
-    <div class="map-container">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.123456789!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39191c1e8c8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sSunday%20Industrial%20Area%2C%20Lahore%2C%20Pakistan!5e0!3m2!1sen!2s!4v1616600000000!5m2!1sen!2s" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"
-        title="HCO Auto Parts Location">
-      </iframe>
+    <div class="map-container reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3398.123456789!2d74.3587!3d31.5204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39191c1e8c8b8b8b%3A0x8b8b8b8b8b8b8b8b!2sSunday%20Industrial%20Area%2C%20Lahore!5e0!3m2!1sen!2s!4v1616600000000" allowfullscreen="" loading="lazy" title="Location"></iframe>
     </div>
 
     <div style="display: flex; flex-wrap: wrap; gap: 30px; margin: 40px 0;">
-      <div style="flex: 1; background: #fbfbfd; border-radius: 28px; padding: 28px;">
-        <h3 style="margin-bottom: 16px;"><i class="fas fa-clock" style="color: #e3222b;"></i> BUSINESS HOURS</h3>
-        <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
-        <p>Sunday: Closed</p>
+      <div style="flex:1; background:#fbfbfd; border-radius:28px; padding:28px;" class="reveal-left">
+        <h3><i class="fas fa-clock" style="color:#e3222b;"></i> BUSINESS HOURS</h3>
+        <p>Mon-Sat: 9AM-7PM | Sun: Closed</p>
       </div>
-      <div style="flex: 1; background: #fbfbfd; border-radius: 28px; padding: 28px;">
-        <h3 style="margin-bottom: 16px;"><i class="fas fa-comment-dots" style="color: #e3222b;"></i> QUICK CONNECT</h3>
-        <p style="margin-bottom: 16px;">Prefer WhatsApp? Chat with us instantly.</p>
-        <a href="https://wa.me/923001431225" class="btn-primary" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+      <div style="flex:1; background:#fbfbfd; border-radius:28px; padding:28px;" class="reveal-right">
+        <h3><i class="fas fa-comment-dots" style="color:#e3222b;"></i> QUICK CONNECT</h3>
+        <p style="margin-bottom:16px;">Chat with us instantly.</p>
+        <a href="https://wa.me/923001431225" class="btn-primary btn-whatsapp ripple"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
       </div>
     </div>
   </div>
-
-  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>info@hcoautoparts.com</li><li>Lahore, Pakistan</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts. All Rights Reserved.</div></footer>
+  <footer><div class="container footer-grid"><div class="footer-col"><h4>QUICK LINKS</h4><ul><li>Home</li><li>Products</li><li>About</li><li>Reviews</li><li>Contact</li></ul></div><div class="footer-col"><h4>CONTACT</h4><ul><li>03026628657</li><li>info@hcoautoparts.com</li></ul></div></div><div class="container copyright">© 2024 HCO Auto Parts.</div></footer>
 </div>
 
 <a href="https://wa.me/923001431225" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -490,6 +1047,16 @@
     { id: 8, name: "Street Chain Cover", category: "Chain Cover", img: "https://picsum.photos/id/8/400/300" }
   ];
 
+  // ---------- REVIEWS DATA ----------
+  let reviews = [
+    { name: "Ahmed Raza", initials: "AR", rating: 5, text: "Best quality motorcycle parts in Lahore! Been buying from HCO for 3 years. Their side covers fit perfectly and last long.", date: "2 weeks ago", verified: true },
+    { name: "Bilal Motors", initials: "BM", rating: 5, text: "As a bike mechanic, I always recommend HCO parts to my customers. Excellent quality and perfect fitting every time.", date: "1 month ago", verified: true },
+    { name: "Shahid Auto", initials: "SA", rating: 4, text: "Great wholesale prices and fast delivery. The mud guards are durable and don't crack easily like other local brands.", date: "3 weeks ago", verified: true },
+    { name: "Kamran Khan", initials: "KK", rating: 5, text: "Ordered bulk chain covers for my shop. Quality is outstanding, customers are happy. Will order again!", date: "2 months ago", verified: true },
+    { name: "Rizwan Parts", initials: "RP", rating: 5, text: "HCO is our go-to supplier for all motorcycle plastic parts. Consistent quality and always on-time delivery.", date: "1 week ago", verified: true },
+    { name: "Usman Store", initials: "US", rating: 4, text: "Good quality headlight visors. The finish is premium and they look great on bikes. Recommended!", date: "3 months ago", verified: false }
+  ];
+
   function renderProductsGrid(containerId, filterCat = "all") {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -498,77 +1065,145 @@
       container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;">No products found</div>`;
       return;
     }
-    container.innerHTML = filtered.map(prod => {
+    container.innerHTML = filtered.map((prod, index) => {
       return `
-        <div class="product-card">
+        <div class="product-card reveal-scale" style="animation-delay: ${index * 0.08}s;">
           <div class="product-img">
             <img src="${prod.img}" alt="${prod.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <i class="fas fa-motorcycle placeholder-icon" style="display: none;"></i>
           </div>
           <div class="product-info">
             <h3>${prod.name}</h3>
-            <div style="color:#e3222b; font-weight:600;">${prod.category}</div>
-            <button class="order-now-btn" data-pname="${prod.name}">ORDER NOW <i class="fab fa-whatsapp"></i></button>
+            <span class="category-badge">${prod.category}</span>
+            <button class="order-now ripple" data-pname="${prod.name}"><i class="fab fa-whatsapp"></i> ORDER NOW</button>
           </div>
         </div>
       `;
     }).join('');
 
-    document.querySelectorAll(`#${containerId} .order-now-btn`).forEach(btn => {
+    document.querySelectorAll(`#${containerId} .order-now`).forEach(btn => {
       btn.addEventListener('click', (e) => {
         let pname = btn.getAttribute('data-pname');
         window.open(`https://wa.me/923001431225?text=Hi%20HCO%20Auto%20Parts%2C%20I%20want%20to%20order%20${encodeURIComponent(pname)}`, '_blank');
       });
     });
+    
+    setTimeout(() => { revealOnScroll(); attachRipple(); }, 100);
   }
 
-  const homePageDiv = document.getElementById('homePage');
-  const productsPageDiv = document.getElementById('productsPage');
-  const contactPageDiv = document.getElementById('contactPage');
+  function renderReviews() {
+    const grid = document.getElementById('reviewsGrid');
+    if (!grid) return;
+    grid.innerHTML = reviews.map((rev, i) => {
+      const starsHtml = Array(5).fill(0).map((_, idx) => 
+        idx < rev.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'
+      ).join('');
+      return `
+        <div class="review-card reveal" style="animation-delay: ${i * 0.1}s;">
+          <div class="review-stars">${starsHtml}</div>
+          <p class="review-text">${rev.text}</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">${rev.initials}</div>
+            <div>
+              <div class="reviewer-name">${rev.name}</div>
+              <div class="reviewer-date">${rev.date}</div>
+            </div>
+            ${rev.verified ? '<span class="verified"><i class="fas fa-check-circle"></i> Verified</span>' : ''}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function createRipple(event) {
+    const button = event.currentTarget;
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+    const rect = button.getBoundingClientRect();
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - rect.left - radius}px`;
+    circle.style.top = `${event.clientY - rect.top - radius}px`;
+    circle.classList.add('ripple-effect');
+    button.appendChild(circle);
+    setTimeout(() => circle.remove(), 600);
+  }
+
+  function attachRipple() {
+    document.querySelectorAll('.ripple').forEach(btn => {
+      btn.removeEventListener('click', createRipple);
+      btn.addEventListener('click', createRipple);
+    });
+  }
+
+  // Pages
+  const pages = {
+    home: document.getElementById('homePage'),
+    products: document.getElementById('productsPage'),
+    about: document.getElementById('aboutPage'),
+    reviews: document.getElementById('reviewsPage'),
+    contact: document.getElementById('contactPage')
+  };
 
   function hideAllPages() {
-    homePageDiv.style.display = 'none';
-    productsPageDiv.style.display = 'none';
-    if (contactPageDiv) contactPageDiv.style.display = 'none';
+    Object.values(pages).forEach(p => { if(p) p.style.display = 'none'; });
   }
 
-  function showHomePage() {
+  function showPage(pageName) {
     hideAllPages();
-    homePageDiv.style.display = 'block';
+    if (pages[pageName]) pages[pageName].style.display = 'block';
     window.scrollTo(0,0);
-    renderProductsGrid('homeProductsPreview', 'all');
+    if (pageName === 'home') renderProductsGrid('homeProductsPreview', 'all');
+    if (pageName === 'products') {
+      const activeCat = document.querySelector('#categoryFilterProducts .cat-btn.active')?.getAttribute('data-cat') || 'all';
+      renderProductsGrid('fullProductsGrid', activeCat);
+    }
+    if (pageName === 'reviews') renderReviews();
+    setTimeout(() => { revealOnScroll(); attachRipple(); }, 100);
   }
 
-  function showProductsPage() {
-    hideAllPages();
-    productsPageDiv.style.display = 'block';
-    window.scrollTo(0,0);
-    const activeCat = document.querySelector('#categoryFilterProducts .cat-btn.active')?.getAttribute('data-cat') || 'all';
-    renderProductsGrid('fullProductsGrid', activeCat);
+  // Generic nav binding helper
+  function bindNavLinks(prefix, page) {
+    document.getElementById(`${prefix}NavLink`)?.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+    document.getElementById(`${prefix}NavLink${page}`)?.addEventListener('click', (e) => { e.preventDefault(); showPage(page); });
   }
 
-  function showContactPage() {
-    hideAllPages();
-    if (contactPageDiv) contactPageDiv.style.display = 'block';
-    window.scrollTo(0,0);
-  }
+  // Home nav
+  bindNavLinks('home', 'Home');
+  document.getElementById('productsNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showPage('products'); });
+  document.getElementById('aboutNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showPage('about'); });
+  document.getElementById('reviewsNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showPage('reviews'); });
+  document.getElementById('contactNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showPage('contact'); });
 
-  // Home page nav links
-  document.getElementById('homeNavLink')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
-  document.getElementById('productsNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
-  document.getElementById('contactNavLinkHome')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+  // Products nav
+  document.getElementById('homeNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+  document.getElementById('productsNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showPage('products'); });
+  document.getElementById('aboutNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showPage('about'); });
+  document.getElementById('reviewsNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showPage('reviews'); });
+  document.getElementById('contactNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showPage('contact'); });
 
-  // Products page nav links
-  document.getElementById('homeNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
-  document.getElementById('productsNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
-  document.getElementById('contactNavLink2')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+  // About nav
+  document.getElementById('homeNavLink4')?.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+  document.getElementById('productsNavLink4')?.addEventListener('click', (e) => { e.preventDefault(); showPage('products'); });
+  document.getElementById('aboutNavLink4')?.addEventListener('click', (e) => { e.preventDefault(); showPage('about'); });
+  document.getElementById('reviewsNavLink4')?.addEventListener('click', (e) => { e.preventDefault(); showPage('reviews'); });
+  document.getElementById('contactNavLink4')?.addEventListener('click', (e) => { e.preventDefault(); showPage('contact'); });
 
-  // Contact page nav links
-  document.getElementById('homeNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showHomePage(); });
-  document.getElementById('productsNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showProductsPage(); });
-  document.getElementById('contactNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showContactPage(); });
+  // Reviews nav
+  document.getElementById('homeNavLink5')?.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+  document.getElementById('productsNavLink5')?.addEventListener('click', (e) => { e.preventDefault(); showPage('products'); });
+  document.getElementById('aboutNavLink5')?.addEventListener('click', (e) => { e.preventDefault(); showPage('about'); });
+  document.getElementById('reviewsNavLink5')?.addEventListener('click', (e) => { e.preventDefault(); showPage('reviews'); });
+  document.getElementById('contactNavLink5')?.addEventListener('click', (e) => { e.preventDefault(); showPage('contact'); });
 
-  document.getElementById('viewAllProductsBtnHome')?.addEventListener('click', () => showProductsPage());
+  // Contact nav
+  document.getElementById('homeNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+  document.getElementById('productsNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showPage('products'); });
+  document.getElementById('aboutNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showPage('about'); });
+  document.getElementById('reviewsNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showPage('reviews'); });
+  document.getElementById('contactNavLink3')?.addEventListener('click', (e) => { e.preventDefault(); showPage('contact'); });
+
+  document.getElementById('viewAllProductsBtnHome')?.addEventListener('click', () => showPage('products'));
 
   function setupCategoryFilter() {
     const btns = document.querySelectorAll('#categoryFilterProducts .cat-btn');
@@ -582,23 +1217,75 @@
   }
 
   function mobileMenuToggle() {
-    const btn1 = document.getElementById('mobileMenuBtn');
-    const links1 = document.getElementById('navLinks');
-    const btn2 = document.getElementById('mobileMenuBtn2');
-    const links2 = document.getElementById('navLinks2');
-    const btn3 = document.getElementById('mobileMenuBtn3');
-    const links3 = document.getElementById('navLinks3');
-    if(btn1 && links1) btn1.addEventListener('click', () => links1.classList.toggle('show'));
-    if(btn2 && links2) btn2.addEventListener('click', () => links2.classList.toggle('show'));
-    if(btn3 && links3) btn3.addEventListener('click', () => links3.classList.toggle('show'));
+    for(let i = 1; i <= 5; i++) {
+      const btn = document.getElementById(`mobileMenuBtn${i === 1 ? '' : i}`);
+      const links = document.getElementById(`navLinks${i === 1 ? '' : i}`);
+      if(btn && links) btn.addEventListener('click', () => links.classList.toggle('show'));
+    }
+  }
+
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const windowHeight = window.innerHeight;
+    reveals.forEach(el => {
+      if (el.getBoundingClientRect().top < windowHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  // Star rating interaction
+  function setupStarRating() {
+    const stars = document.querySelectorAll('#starRatingInput i');
+    let selectedRating = 0;
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        updateStars(stars, selectedRating);
+      });
+      star.addEventListener('mouseenter', () => {
+        const val = parseInt(star.getAttribute('data-value'));
+        updateStars(stars, val);
+      });
+    });
+    document.getElementById('starRatingInput')?.addEventListener('mouseleave', () => {
+      updateStars(stars, selectedRating);
+    });
+
+    document.getElementById('submitReviewBtn')?.addEventListener('click', () => {
+      const text = document.getElementById('reviewTextarea')?.value.trim();
+      if (!text) { alert('Please write a review!'); return; }
+      if (selectedRating === 0) { alert('Please select a star rating!'); return; }
+      reviews.unshift({
+        name: "You", initials: "YO", rating: selectedRating,
+        text: text, date: "Just now", verified: false
+      });
+      renderReviews();
+      document.getElementById('reviewTextarea').value = '';
+      selectedRating = 0;
+      updateStars(stars, 0);
+      setTimeout(revealOnScroll, 100);
+    });
+  }
+
+  function updateStars(stars, rating) {
+    stars.forEach(s => {
+      const val = parseInt(s.getAttribute('data-value'));
+      s.style.color = val <= rating ? '#ffc107' : '#ddd';
+    });
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     renderProductsGrid('homeProductsPreview', 'all');
     renderProductsGrid('fullProductsGrid', 'all');
+    renderReviews();
     setupCategoryFilter();
     mobileMenuToggle();
-    showHomePage();
+    setupStarRating();
+    showPage('home');
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+    attachRipple();
   });
 </script>
 </body>
